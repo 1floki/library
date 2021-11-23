@@ -8,29 +8,55 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="./img/book.png" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
   <body>
     <header>
-      <h1> 📚 Library - Keep Record of Your Readings</h1>
+      <h1>📚 Library - Keep Record of Your Readings</h1>
       <button id="addBook">Add Book</button>
     </header>
     <main>
-        <div class="container">
-            <div class="book">
+      <div class="container">
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      </div>
 
-            </div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
+      <div class="bookPopup">
+        <button>Cancel</button>
 
+        <div class="form-content">
+          <form action="" class="formPopup"></form>
+          <label for="name">Book Name:</label>
+          <input type="text" id="name" name="name" />
+          <br />
+          <label for="author">Author Name:</label>
+          <input type="text" id="author" name="author" />
+          <br />
+          <label for="number-of-pages">How many pages have you read?</label>
+          <input
+            type="number"
+            id="number-of-pages"
+            name="number-of-pages"
+            min="0"
+          />
+          <br />
+          <input type="checkbox" id="read" name="read" value="read" />
+          <label for="read">I've read this book</label>
+          <button type="submit">Submit</button>
         </div>
+      </div>
     </main>
   </body>
 </html>

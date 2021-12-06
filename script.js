@@ -1,21 +1,23 @@
-let myLibrary = [];
+const btnSubmit = document.getElementById("submit");
+const formSubmit = document.querySelector(".formPopup");
+const btnCancel = document.getElementById("cancel");
+const btnAdd = document.getElementById("addBook");
+const popup = document.querySelector(".bookPopup");
 
-function Book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.page = pages;
-  this.read = read;
+formSubmit.addEventListener("submit", handleForm);
+
+btnCancel.addEventListener("click", removePopup);
+btnAdd.addEventListener("click", showPopup);
+
+function removePopup() {
+  popup.style["display"] = "none";
 }
 
-
-function addBookToLibrary() {
-    let currentAuthor = prompt("What's the name of the author?");
-    let currentTitle = prompt("What's the title of the book");
-    let currentPages = prompt("How many pages have you read");
-    let currentRead = prompt("Have you finished the book (true/false)");
-
-    let newBook = new Book(currentAuthor, currentTitle, currentPages, currentRead);
-    myLibrary.push(newBook);
+function showPopup() {
+  popup.style["display"] = "block";
 }
 
-
+function handleForm(event) {
+  event.preventDefault();
+  console.log("Hello");
+}

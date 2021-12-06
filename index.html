@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <header>
       <h1>📚 Library - Keep Record of Your Readings</h1>
@@ -32,29 +33,47 @@
         <div class="book"></div>
         <div class="book"></div>
       </div>
-
       <div class="bookPopup">
-        <button>Cancel</button>
-
+        <button id="cancel">Cancel</button>
         <div class="form-content">
-          <form action="" class="formPopup"></form>
-          <label for="name">Book Name:</label>
-          <input type="text" id="name" name="name" />
-          <br />
-          <label for="author">Author Name:</label>
-          <input type="text" id="author" name="author" />
-          <br />
-          <label for="number-of-pages">How many pages have you read?</label>
-          <input
-            type="number"
-            id="number-of-pages"
-            name="number-of-pages"
-            min="0"
-          />
-          <br />
-          <input type="checkbox" id="read" name="read" value="read" />
-          <label for="read">I've read this book</label>
-          <button type="submit">Submit</button>
+          <form action="" class="formPopup">
+            <label for="name">Book:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter the book name here"
+              required
+            />
+            <br />
+            <br />
+            <label for="author">Author:</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Enter the author name here"
+              required
+            />
+            <br />
+            <br />
+            <label for="number-of-pages">Pages:</label>
+            <input
+              type="number"
+              id="number-of-pages"
+              name="number-of-pages"
+              min="0"
+              placeholder="How many pages have you read?"
+              required
+            />
+            <br />
+            <br />
+            <input type="checkbox" id="read" name="read" value="read" />
+            <label for="read">I've read this book</label>
+            <br />
+            <br />
+            <button id="submit" type="submit">Submit</button>
+          </form>
         </div>
       </div>
     </main>

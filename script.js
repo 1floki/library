@@ -25,6 +25,10 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.toggleReadStatus = function () {
+    this.read ^= true;
+    this.read = Boolean(this.read);
+  };
 }
 
 function addBookToLibrary(event) {
@@ -48,5 +52,4 @@ function addBookToLibrary(event) {
     )
   );
   removePopup();
-
 }

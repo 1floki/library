@@ -40,20 +40,21 @@ main {
 
 .container {
   justify-content: center;
-
-  background-color: lightgray;
   display: flex;
   width: 100%;
   flex-flow: wrap;
+  margin-top: 20px;
 }
 
 .book {
   border-color: black;
-  border-width: 2px;
+  border-width: 1px;
   border: 2px;
-  border-style: dashed;
-  height: 400px;
+  border-style: groove;
+  height: 210px;
   width: 290px;
+  text-align: center;
+  padding: 10px;
 }
 
 .bookPopup {

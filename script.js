@@ -3,6 +3,7 @@ const formSubmit = document.querySelector(".formPopup");
 const btnCancel = document.getElementById("cancel");
 const btnAdd = document.getElementById("addBook");
 const popup = document.querySelector(".bookPopup");
+const container = document.querySelector(".container");
 
 formSubmit.addEventListener("submit", addBookToLibrary);
 
@@ -52,4 +53,57 @@ function addBookToLibrary(event) {
     )
   );
   removePopup();
+  removeAllChildNodes(container);
+  updateDom();
+}
+
+function updateDom() {
+  //loops over the myLibrary list containing objects
+  //Creates proper html elements for book, author, no. of pages
+  //adds class of book to the elements and appends them in container
+  for (let i = 0; i < myLibrary.length; i++) {
+    let bookDiv = document.createElement("div");
+    bookDiv.classList.add("book", `${i}`);
+
+    let bookTitle = document.createElement("h3");
+    bookTitle.textContent = `Title: ${myLibrary[i].title}`;
+    bookDiv.appendChild(bookTitle);
+
+    let bookAuthor = document.createElement("h3");
+    bookAuthor.textContent = `Author: ${myLibrary[i].author}`;
+    bookDiv.appendChild(bookAuthor);
+
+    let bookPages = document.createElement("h3");
+    bookPages.textContent = `Pages: ${myLibrary[i].pages}`;
+    bookDiv.appendChild(bookPages);
+
+    let readTitle = document.createElement("label");
+    readTitle.setAttribute("for", `${myLibrary[i].title}-checkbox`);
+    readTitle.textContent = "Read Status: ";
+    bookDiv.appendChild(readTitle);
+
+    let readStatus = document.createElement("INPUT");
+    readStatus.setAttribute("type", "checkbox");
+    readStatus.setAttribute("id", `${myLibrary[i].title}-checkbox`);
+    readStatus.setAttribute("name", `${myLibrary[i].title}-checkbox`);
+    readStatus.checked = myLibrary[i].read;
+    bookDiv.appendChild(readStatus);
+
+    let breakIn = document.createElement("br");
+    bookDiv.appendChild(breakIn);
+
+    let deleteBook = document.createElement("button");
+    deleteBook.textContent = "Delete Book";
+    deleteBook.setAttribute("id", `${myLibrary[i].title}-btn`);
+    bookDiv.appendChild(deleteBook);
+
+    let bookContainer = document.querySelector(".container");
+    bookContainer.appendChild(bookDiv);
+  }
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }

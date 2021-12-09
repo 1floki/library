@@ -6,6 +6,8 @@ const popup = document.querySelector(".bookPopup");
 const container = document.querySelector(".container");
 let deleteButtons = [];
 let deleteButtonsArray = [];
+let checkButtons = [];
+let checkButtonsArray = [];
 
 formSubmit.addEventListener("submit", addBookToLibrary);
 
@@ -21,7 +23,19 @@ function showPopup() {
   popup.style["display"] = "block";
 }
 
-let myLibrary = [];
+let myLibrary;
+let myLocalStorage = localStorage.getItem("myLibrary");
+
+window.onload = function () {
+  if (myLocalStorage != null) {
+    myLibrary = JSON.parse(myLocalStorage);
+    updateDom();
+    updateQuery();
+    updateCheckQuery();
+  } else {
+    myLibrary = [];
+  }
+};
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -58,6 +72,8 @@ function addBookToLibrary(event) {
   removeAllChildNodes(container);
   updateDom();
   updateQuery();
+  updateCheckQuery();
+  updateLocalStorage(myLibrary);
 }
 
 function updateDom() {
@@ -90,6 +106,7 @@ function updateDom() {
     readStatus.setAttribute("id", `${myLibrary[i].title}-checkbox`);
     readStatus.setAttribute("name", `${myLibrary[i].title}-checkbox`);
     readStatus.setAttribute("data-checkid", i);
+    readStatus.classList.add("readstatus");
     readStatus.checked = myLibrary[i].read;
     bookDiv.appendChild(readStatus);
 
@@ -123,12 +140,33 @@ function updateQuery() {
   });
 }
 
+function updateCheckQuery() {
+  checkButtons = document.querySelectorAll(".readstatus");
+  checkButtonsArray = Array.from(checkButtons);
+  checkButtonsArray.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      changeReadStatus(btn.dataset.checkid);
+    });
+  });
+}
 
 function deleteBookFromLibrary(bookNumber) {
-  if (bookNumber < myLibrary.length) {
+  if (bookNumber <= myLibrary.length) {
     myLibrary.splice(bookNumber, 1);
     removeAllChildNodes(container);
     updateDom();
+    updateLocalStorage(myLibrary);
   }
 }
 
+function changeReadStatus(bookNumber) {
+  myLibrary[bookNumber].read ^= true;
+  removeAllChildNodes(container);
+  updateDom();
+  updateLocalStorage(myLibrary);
+}
+
+function updateLocalStorage(data) {
+  data = JSON.stringify(data);
+  localStorage.setItem("myLibrary", data);
+}

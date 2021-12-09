@@ -136,6 +136,7 @@ function updateQuery() {
   deleteButtons.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       deleteBookFromLibrary(btn.dataset.buttonind);
+      updateQuery();
     });
   });
 }

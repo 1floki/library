@@ -4,6 +4,8 @@ const btnCancel = document.getElementById("cancel");
 const btnAdd = document.getElementById("addBook");
 const popup = document.querySelector(".bookPopup");
 const container = document.querySelector(".container");
+let deleteButtons = [];
+let deleteButtonsArray = [];
 
 formSubmit.addEventListener("submit", addBookToLibrary);
 
@@ -55,6 +57,7 @@ function addBookToLibrary(event) {
   removePopup();
   removeAllChildNodes(container);
   updateDom();
+  updateQuery();
 }
 
 function updateDom() {
@@ -86,6 +89,7 @@ function updateDom() {
     readStatus.setAttribute("type", "checkbox");
     readStatus.setAttribute("id", `${myLibrary[i].title}-checkbox`);
     readStatus.setAttribute("name", `${myLibrary[i].title}-checkbox`);
+    readStatus.setAttribute("data-checkid", i);
     readStatus.checked = myLibrary[i].read;
     bookDiv.appendChild(readStatus);
 
@@ -94,7 +98,8 @@ function updateDom() {
 
     let deleteBook = document.createElement("button");
     deleteBook.textContent = "Delete Book";
-    deleteBook.setAttribute("id", `${myLibrary[i].title}-btn`);
+    deleteBook.setAttribute("data-buttonind", i);
+    deleteBook.classList.add("delete-button");
     bookDiv.appendChild(deleteBook);
 
     let bookContainer = document.querySelector(".container");
@@ -107,3 +112,23 @@ function removeAllChildNodes(parent) {
     parent.removeChild(parent.firstChild);
   }
 }
+
+function updateQuery() {
+  deleteButtons = document.querySelectorAll(".delete-button");
+  deleteButtonsArray = Array.from(deleteButtons);
+  deleteButtons.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      deleteBookFromLibrary(btn.dataset.buttonind);
+    });
+  });
+}
+
+
+function deleteBookFromLibrary(bookNumber) {
+  if (bookNumber < myLibrary.length) {
+    myLibrary.splice(bookNumber, 1);
+    removeAllChildNodes(container);
+    updateDom();
+  }
+}
+
